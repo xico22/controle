@@ -4,14 +4,16 @@ import { createProject } from '../../store/actions/projectActions'
 import { Redirect } from 'react-router-dom'
 import M from "materialize-css/dist/js/materialize.min.js";
 import "materialize-css/dist/css/materialize.min.css";
-
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
 
 class CreateProject extends Component {
   constructor(props) {
     super(props); 
     this.handleDateChange = this.handleDateChange.bind(this);
-    //console.log(props)
+    console.log(props)
     this.state = {
+      numero:'',
       solicitante: '',
       tiposolicitacao:'',
       titulo:'',
@@ -25,7 +27,7 @@ class CreateProject extends Component {
     };
   }
   handleDateChange(e){
-    console.log(e.target.value)
+    //console.log(e.target.value)
     this.setState({
       [e.target.id]: new Date(e.target.value+" 00:00:00 GMT-03:00")
     });
@@ -36,9 +38,10 @@ class CreateProject extends Component {
   }
   handleChange = (e) => {
     this.setState({
-      [e.target.id]: e.target.value
+      [e.target.id]: e.target.value,
+      numero:this.props.counter+1
     });
-    //console.log(this.state);
+    console.log(this.state);
   }
 
   handleSubmit = (e) => {
@@ -48,7 +51,8 @@ class CreateProject extends Component {
     this.props.history.push('/');
   }
   render() {
-    const { auth } = this.props;
+    const { auth, counter } = this.props;
+    
     if (!auth.uid) return <Redirect to='/signin' /> 
     //let today = new Date().toISOString().split("T")[0];
     let _this = this;
@@ -122,8 +126,11 @@ class CreateProject extends Component {
 }
 
 const mapStateToProps = (state) => {
+  const counts = state.firestore.ordered.counters;
+  const count =  counts ? counts[0].count : null
   return {
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    counter: count
   }
 }
 
@@ -133,4 +140,9 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateProject)
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect([
+    { collection: 'counters'}
+  ])
+)(CreateProject)

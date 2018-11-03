@@ -48,10 +48,10 @@ class ProjectReport extends Component {
     }
   
     exportFile() {
-      let users = [["Tipo", "Titulo", "Solicitante","Tempo de Execução","Status","Prazo de Entrega"]]
+      let users = [["Número", "Tipo", "Titulo", "Solicitante","Tempo de Execução","Status","Prazo de Entrega"]]
       //console.log(this.props.projects)
       this.props.projects.forEach((project) => {
-        let userArray = [project.tiposolicitacao, project.titulo, project.solicitante,
+        let userArray = [project.numero, project.tiposolicitacao, project.titulo, project.solicitante,
                          project.tempoexecucao, project.status,
                          new Date(project.prazoentrega.seconds*1000).toLocaleDateString()
                         ]
@@ -67,7 +67,7 @@ class ProjectReport extends Component {
   
     render() {
       const { projects, auth } = this.props;
-      console.log(projects)
+      //console.log(projects)
       if (!auth.uid) return <Redirect to='/signin' />
       return (
         <div style={style}>
@@ -79,6 +79,7 @@ class ProjectReport extends Component {
                 <Table className={projects.table}>
                   <TableHead>
                     <TableRow>
+                      <CustomTableCell>Número</CustomTableCell>
                       <CustomTableCell>Tipo</CustomTableCell>
                       <CustomTableCell>Titulo</CustomTableCell>
                       <CustomTableCell>Solicitante</CustomTableCell>
@@ -92,8 +93,9 @@ class ProjectReport extends Component {
                       return (
                         <TableRow key={project.id}>
                           <CustomTableCell component="th" scope="row">
-                            {project.tiposolicitacao}
+                            {project.numero}
                           </CustomTableCell>
+                          <CustomTableCell>{project.tiposolicitacao}</CustomTableCell>
                           <CustomTableCell>{project.titulo}</CustomTableCell>
                           <CustomTableCell>{project.solicitante}</CustomTableCell>
                           <CustomTableCell>{project.tempoexecucao}</CustomTableCell>
@@ -118,7 +120,7 @@ class ProjectReport extends Component {
   
 
   const mapStateToProps = (state) => {
-    // console.log(state);
+    //console.log(state);
     return {
       projects: state.firestore.ordered.projects,
       auth: state.firebase.auth,

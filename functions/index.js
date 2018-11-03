@@ -53,7 +53,7 @@ const counterRef = functions.firestore.document('counters/incomes')
 
 // Perform an increment when income is added
 module.exports.incrementIncomesCounter = incomeRef.onCreate(event => {
-  const counterRef = event.data.ref.firestore().doc('counters/incomes')
+  const counterRef = admin.firestore().collection('counters').doc('incomes')
 
   counterRef.get()
   .then(documentSnapshot => {
@@ -70,7 +70,7 @@ module.exports.incrementIncomesCounter = incomeRef.onCreate(event => {
 
 // Perform an decrement when income is deleted
 module.exports.decrementIncomesCounter = incomeRef.onDelete(event => {
-  const counterRef = event.data.ref.firestore.doc('counters/incomes')
+  const counterRef = admin.firestore().collection('counters').doc('incomes')
 
   counterRef.get()
   .then(documentSnapshot => {
@@ -87,11 +87,13 @@ module.exports.decrementIncomesCounter = incomeRef.onDelete(event => {
 
 // Perform a fresh recount(this is expensive) when the counter is deleted (This is optional as well)
 module.exports.recountIncomesCount = counterRef.onDelete(event => {
-  const incomesRef = event.data.ref.firestore().collection('incomes')
+  const incomesRef = admin.firestore().collection('projects')
+  const projRef = admin.firestore().collection('counters').doc('incomes')
 
   return incomesRef.get()
     .then(querySnapshot => {
-      counterRef.set({
+      console.log(querySnapshot.docs.length)
+      projRef.set({
         count: querySnapshot.docs.length
       })
     })

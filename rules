@@ -11,5 +11,8 @@ service cloud.firestore {
     match /notifications/{notification} {
       allow read: if request.auth.uid != null;
     }
+    match /counters/{counter} {
+      allow read: if request.auth.uid != null;
+    }
   }
 }

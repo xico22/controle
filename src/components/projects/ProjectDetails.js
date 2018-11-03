@@ -7,8 +7,6 @@ import { updateProject } from '../../store/actions/projectActions'
 import M from "materialize-css/dist/js/materialize.min.js";
 import "materialize-css/dist/css/materialize.min.css";
 import ReactDOM from 'react-dom';
-
-
 class ProjectDetails extends Component {
   constructor(props) {
     super(props); 
@@ -27,6 +25,10 @@ class ProjectDetails extends Component {
     };
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleChange= this.handleChange.bind(this);
+    this.renderInputFieldDataconclusao= this.renderInputFieldDataconclusao.bind(this);
+    this.renderInputFieldRevjustificativa=this.renderInputFieldRevjustificativa.bind(this);
+    this.renderInputFieldRevtempoexecucao=this.renderInputFieldRevtempoexecucao.bind(this);
+    this.handleSubmit=this.handleSubmit.bind(this);
   }
   handleDateChange(e){
     //console.log(e.target)
@@ -59,12 +61,12 @@ class ProjectDetails extends Component {
       )}
       }
   renderInputFieldRevtempoexecucao(){
-  if (this.state.revtempoexecucao==='') { console.log("teste1")};
+      M.AutoInit();
       if(this.state.status === 'Em Revisao' || this.state.revtempoexecucao!=='') {
         return (
           <div className="input-field">
           <select id="revtempoexecucao" onChange={this.handleChange} value={this.state.revtempoexecucao}>
-            <option value="">Selecione uma opção</option>
+            <option value="">nao alterado</option>
             <option value="N1">N1 até 5 min</option>
             <option value="N2">N2 até 15 min</option>
             <option value="N3">N3 até 30 min</option>
@@ -83,7 +85,7 @@ class ProjectDetails extends Component {
             <option value="N16">N16 até 32 h</option>
             <option value="N17">N11 até 40 h</option>
           </select>
-          <label htmlFor="revtempoexecucao">Tempo de Execução Revisado</label>
+          <label htmlFor="revtempoexecucao">Revisao do Tempo de Execução</label>
         </div>
         )
     }
