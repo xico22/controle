@@ -31,15 +31,15 @@ class SignUp extends Component {
             <input type="email" id='email' onChange={this.handleChange} />
           </div>
           <div className="input-field">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Senha</label>
             <input type="password" id='password' onChange={this.handleChange} />
           </div>
           <div className="input-field">
-            <label htmlFor="firstName">First Name</label>
+            <label htmlFor="firstName">Primeiro Nome</label>
             <input type="text" id='firstName' onChange={this.handleChange} />
           </div>
           <div className="input-field">
-            <label htmlFor="lastName">Last Name</label>
+            <label htmlFor="lastName">Sobrenome</label>
             <input type="text" id='lastName' onChange={this.handleChange} />
           </div>
           <div className="input-field">

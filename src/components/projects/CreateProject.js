@@ -13,13 +13,15 @@ class CreateProject extends Component {
     //console.log(props)
     this.state = {
       solicitante: '',
-      chave: '',
-      contato:'',
-      areasolicitante:'',
       tiposolicitacao:'',
+      titulo:'',
       descricao:'',
       tempoexecucao:'',
-      prazoentrega: ''
+      prazoentrega: '',
+      status:'aberto',
+      revjustificativa:'',
+      revtempoexecucao:'',
+      dataconclusao:''
     };
   }
   handleDateChange(e){
@@ -36,7 +38,7 @@ class CreateProject extends Component {
     this.setState({
       [e.target.id]: e.target.value
     });
-    console.log(this.state);
+    //console.log(this.state);
   }
 
   handleSubmit = (e) => {
@@ -53,22 +55,10 @@ class CreateProject extends Component {
     return (
       <div className="container">
         <form className="white" onSubmit={this.handleSubmit}>
-          <h5 className="grey-text text-darken-3">Criando um novo Projeto</h5>
+          <h5 className="grey-text text-darken-3">Criando um novo Entregavel</h5>
           <div className="input-field">
             <input type="text" id='solicitante' onChange={this.handleChange}/>
             <label htmlFor="solicitante">Solicitante</label>
-          </div>
-          <div className="input-field">
-            <input type="text" id='chave' onChange={this.handleChange} />
-            <label htmlFor="chave">Chave</label>
-          </div>
-          <div className="input-field">
-            <input type="text" id='contato' onChange={this.handleChange} />
-            <label htmlFor="contato">Contato</label>
-          </div>
-          <div className="input-field">
-            <input type="text" id='areasolicitante' onChange={this.handleChange} />
-            <label htmlFor="areasolicitante">Área Solicitante</label>
           </div>
           <div className="input-field">
             <select id="tiposolicitacao" defaultValue="" onChange={this.handleChange} value={this.state.value}>
@@ -87,6 +77,10 @@ class CreateProject extends Component {
             </select>
             <label htmlFor="tiposolicitacao">Tipo de Solicitação</label>
           </div>         
+          <div className="input-field">
+            <input type="text" id='titulo' onChange={this.handleChange}/>
+            <label htmlFor="titulo">Titulo</label>
+          </div>
           <div className="input-field">
             <textarea id="descricao" className="materialize-textarea" onChange={this.handleChange}></textarea>
             <label htmlFor="descricao">Descricao Geral</label>
@@ -112,7 +106,7 @@ class CreateProject extends Component {
               <option value="N16">N16 até 32 h</option>
               <option value="N17">N11 até 40 h</option>
             </select>
-            <label htmlFor="tempoexecucao">Tipo de Solicitação</label>
+            <label htmlFor="tempoexecucao">Tempo de Execução</label>
           </div>
           <div className="input-field col s12">
             <input type='date' id="prazoentrega" onChange={this.handleDateChange}/>

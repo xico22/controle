@@ -12,7 +12,7 @@ const Navbar = (props) => {
   return (
     <nav className="nav-wrapper grey darken-3">
       <div className="container">
-        <Link to='/' className="brand-logo">Controle de Entregaveis</Link>
+        <Link to='/' className="brand-logo">Entregáveis</Link>
         {links}
       </div>
     </nav>

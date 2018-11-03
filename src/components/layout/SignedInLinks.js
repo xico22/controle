@@ -10,6 +10,7 @@ const SignedInLinks = (props) => {
     <div>
       <ul className="right hide-on-med-and-down">
         <li><NavLink to='/create'>Novo Projeto</NavLink></li>
+        <li><NavLink to='/report'>Relatório</NavLink></li>
         <li><a onClick={props.signOut}>Deslogar</a></li>
         <li><NavLink to='/' className="btn btn-floating pink lighten-1">
           {props.profile.initials}
@@ -32,7 +33,8 @@ class Sidebar extends Component {
       var elem = document.querySelector(".sidenav");
       var instance = M.Sidenav.init(elem, {
           edge: "left",
-          inDuration: 250
+          inDuration: 250,
+          closeOnClick: true
       });
   }
 
@@ -47,8 +49,9 @@ class Sidebar extends Component {
       <a href="#email"><span className="black-text email">{this.props.email}</span></a>
     </div>
                   <li><div className="divider" /></li>
-                  <li><NavLink to='/create'>Novo Projeto</NavLink></li>
-                  <li><a onClick={this.props.signOut}>Deslogar</a></li>
+                  <li><NavLink to='/create' class="sidenav-close">Novo Projeto</NavLink></li>
+                  <li><NavLink to='/report'class="sidenav-close">Relatório</NavLink></li>
+                  <li><a onClick={this.props.signOut}class="sidenav-close">Deslogar</a></li>
               </ul>
               <a href="#" data-target="slide-out" className="sidenav-trigger">
                   <i className="material-icons">menu</i>

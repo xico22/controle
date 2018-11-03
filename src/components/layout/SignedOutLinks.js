@@ -34,8 +34,8 @@ class Sidebar extends Component {
               <div className="background"><img src="/img/mario-bg.png"/></div>
     </div>
                   <li><div className="divider" /></li>
-                    <li><NavLink to='/signup'>Cadastrar</NavLink></li>
-                    <li><NavLink to='/signin'>Logar-se</NavLink></li>
+                    <li><NavLink to='/signup' class="sidenav-close">Cadastrar</NavLink></li>
+                    <li><NavLink to='/signin' class="sidenav-close">Logar-se</NavLink></li>
                 </ul>
                 <a href="#" data-target="slide-out" className="sidenav-trigger">
                     <i className="material-icons">menu</i>
